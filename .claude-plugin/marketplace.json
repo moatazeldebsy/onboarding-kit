@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
+  "name": "onboarding-kit",
+  "owner": {
+    "name": "Moataz Nabil",
+    "url": "https://github.com/moatazeldebsy"
+  },
+  "description": "Onboarding plugin for new Claude Code users.",
+  "plugins": [
+    {
+      "name": "onboarding-kit",
+      "source": "./",
+      "description": "Get started with Claude Code fast: check your machine, set up settings and CLAUDE.md, pick plugins for your role and level, and learn habits that save tokens.",
+      "category": "productivity",
+      "license": "MIT",
+      "keywords": ["onboarding", "setup", "getting-started", "tokens", "best-practices", "beginner"]
+    }
+  ]
+}
