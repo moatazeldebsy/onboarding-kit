@@ -1,0 +1,22 @@
+{
+  "permissions": {
+    "deny": [
+      "Read(./node_modules/**)",
+      "Read(./dist/**)",
+      "Read(./build/**)",
+      "Read(./out/**)",
+      "Read(./coverage/**)",
+      "Read(./.next/**)",
+      "Read(./target/**)",
+      "Read(./vendor/**)",
+      "Read(./.venv/**)",
+      "Read(./__pycache__/**)",
+      "Read(./package-lock.json)",
+      "Read(./yarn.lock)",
+      "Read(./pnpm-lock.yaml)",
+      "Read(./poetry.lock)",
+      "Read(./Cargo.lock)",
+      "Read(./go.sum)"
+    ]
+  }
+}

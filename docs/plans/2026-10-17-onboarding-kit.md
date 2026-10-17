@@ -15,7 +15,7 @@ A Claude Code plugin that gets a new user from "just installed" to a productive,
 |---|---|---|
 | Name | `onboarding-kit` | Says what it does |
 | Format | One plugin, 4 skills, 1 slash command, plain shell scripts | Skills trigger on their own topics; no runtime dependencies |
-| OS support | macOS + Linux; Windows via WSL only | Covers most users; native Windows doubles the script work |
+| OS support | macOS + Linux; Windows via WSL for v0.1 | Claude Code itself supports native Windows, but `doctor.sh` is bash; a PowerShell version is a v0.2 candidate |
 | Audience | Anyone new to Claude Code: engineers, engineering managers, product managers, QA, designers, analysts, writers | Your call |
 | Personalisation | Flow asks **role** and **level** (beginner / intermediate / advanced) up front and tailors checks, templates and plugin picks | Your call |
 | Recommended plugins | Minimal and neutral; official-marketplace plugins first, no personal picks | Your call |
@@ -128,7 +128,7 @@ Every command and setting named here gets checked against current Claude Code do
 1. **Scaffold repo** — layout above, `plugin.json`, `marketplace.json`, README stub.
    → verify: `claude plugin validate .` passes.
 2. **Fact-check content** — confirm each command, setting key, and install command against current Claude Code docs (via the `claude-code-guide` agent). Write `token-playbook.md`, `roles.md`, templates, and fill the `recommended-plugins.md` matrix from the live marketplace.
-   → verify: every command in the playbook has a docs link or was run locally; every plugin in the matrix installs cleanly.
+   → verify: every command in the playbook has a docs link or was run locally; every plugin in the matrix exists in `claude-plugins-official` (actual installs are tested in step 7, on clean machines, so the author's own setup isn't changed).
 3. **`doctor.sh`** — write it read-only, POSIX-ish bash, `shellcheck`-clean; bats tests with faked PATHs for missing/old/duplicate installs.
    → verify: `shellcheck` + `bats tests/` pass on macOS and in an Ubuntu container.
 4. **Write the 4 SKILL.md files** — short bodies, details pushed to `references/` so the skill itself stays cheap to load. Use `skill-creator` for descriptions that trigger reliably.
