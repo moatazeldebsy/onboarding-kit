@@ -62,7 +62,7 @@ onboarding-kit/
 
 ### 1. `getting-started` (orchestrator)
 Triggers on "get started / set up / onboard / new to Claude Code". Starts with two questions, then runs `doctor.sh`, shows a one-screen status, and walks the phases in order, skipping any already done:
-0. **Who are you?** Role (engineer, QA/SDET, engineering manager, product manager, designer, analyst/data, writer/other) and level (beginner, intermediate, advanced). Saved to `~/.claude/starter-profile.json` so later runs and the other skills reuse it.
+0. **Who are you?** Role (engineer, QA/SDET, engineering manager, product manager, designer, analyst/data, writer/other) and level (beginner, intermediate, advanced). Saved to `~/.claude/onboarding-kit-profile.json` so later runs and the other skills reuse it.
 1. Machine ready → hands to `machine-setup`
 2. User-level settings → `project-setup` (user scope)
 3. Current project or workspace → `project-setup` (project scope)
