@@ -11,7 +11,7 @@ A Claude Code plugin that takes you from "just installed" to a working, low-cost
 /plugin install onboarding-kit@onboarding-kit
 ```
 
-Then run `/starter`, or just say "help me get started with Claude Code".
+Then run `/onboarding-kit:getting-started`, or just say "help me get started with Claude Code".
 
 ## What it does
 

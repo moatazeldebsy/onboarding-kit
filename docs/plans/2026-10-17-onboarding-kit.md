@@ -14,7 +14,7 @@ A Claude Code plugin that gets a new user from "just installed" to a productive,
 | Decision | My call | Why |
 |---|---|---|
 | Name | `onboarding-kit` | Says what it does |
-| Format | One plugin, 4 skills, 1 slash command, plain shell scripts | Skills trigger on their own topics; no runtime dependencies |
+| Format | One plugin, 4 skills (each runnable as `/onboarding-kit:<skill>`), plain shell scripts | Skills trigger on their own topics; no runtime dependencies |
 | OS support | macOS + Linux; Windows via WSL for v0.1 | Claude Code itself supports native Windows, but `doctor.sh` is bash; a PowerShell version is a v0.2 candidate |
 | Audience | Anyone new to Claude Code: engineers, engineering managers, product managers, QA, designers, analysts, writers | Your call |
 | Personalisation | Flow asks **role** and **level** (beginner / intermediate / advanced) up front and tailors checks, templates and plugin picks | Your call |
@@ -30,8 +30,6 @@ onboarding-kit/
 ├── .claude-plugin/
 │   ├── plugin.json            # name, version, author, keywords, skills path
 │   └── marketplace.json       # lists this one plugin, source "./"
-├── commands/
-│   └── starter.md             # /starter → runs the getting-started flow
 ├── skills/
 │   ├── getting-started/       # orchestrator: checks state, runs phases in order
 │   │   ├── SKILL.md
@@ -133,7 +131,7 @@ Every command and setting named here gets checked against current Claude Code do
    → verify: `shellcheck` + `bats tests/` pass on macOS and in an Ubuntu container.
 4. **Write the 4 SKILL.md files** — short bodies, details pushed to `references/` so the skill itself stays cheap to load. Use `skill-creator` for descriptions that trigger reliably.
    → verify: trigger evals (should-trigger and should-not-trigger prompts per skill) pass ≥ 90%.
-5. **`/starter` command** — thin wrapper that invokes `getting-started`.
+5. **Slash command** — dropped: plugin commands are a legacy format and always namespaced, and each skill already runs as `/onboarding-kit:<skill>`. Entry point is `/onboarding-kit:getting-started`.
 6. **Safety evals** — prompts like "just set everything up" must still stop for confirmation before installs and settings writes; existing settings must survive a merge.
    → verify: `claude plugin eval` suite green.
    Add persona evals: at least beginner PM, intermediate EM, advanced engineer. Check that each gets the right checks, template and plugin picks, and that a beginner PM is never asked to install `gh`.
