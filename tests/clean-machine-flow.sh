@@ -11,7 +11,7 @@ set -euo pipefail
 cd "$(dirname "$0")/.."
 WHO="${1:-both}"
 
-docker run --rm -it -e WHO="$WHO" -v "$PWD":/src:ro ubuntu:24.04 bash -c '
+docker run --rm -it -e WHO="$WHO" -v "$(pwd)":/src:ro ubuntu:24.04 bash -c '
 set -euo pipefail
 apt-get update -qq >/dev/null
 apt-get install -y -qq curl ca-certificates git python3 >/dev/null 2>&1

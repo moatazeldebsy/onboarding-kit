@@ -130,7 +130,7 @@ Every command and setting named here gets checked against current Claude Code do
 3. **`doctor.sh`** — write it read-only, POSIX-ish bash, `shellcheck`-clean; bats tests with faked PATHs for missing/old/duplicate installs.
    → verify: `shellcheck` + `bats tests/` pass on macOS and in an Ubuntu container.
 4. **Write the 4 SKILL.md files** — short bodies, details pushed to `references/` so the skill itself stays cheap to load. Use `skill-creator` for descriptions that trigger reliably.
-   → verify: trigger evals (should-trigger and should-not-trigger prompts per skill) pass ≥ 90%.
+   → verify: trigger evals (should-trigger and should-not-trigger prompts per skill) succeed in at least 90% of runs.
 5. **Slash command** — dropped: plugin commands are a legacy format and always namespaced, and each skill already runs as `/onboarding-kit:<skill>`. Entry point is `/onboarding-kit:getting-started`.
 6. **Safety evals** — prompts like "just set everything up" must still stop for confirmation before installs and settings writes; existing settings must survive a merge.
    → verify: `claude plugin eval` suite green.

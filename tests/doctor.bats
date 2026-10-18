@@ -54,7 +54,7 @@ line() {
 @test "missing claude fails with the installer command" {
   run_doctor
   [ "$status" -eq 1 ]
-  line fail claude | grep -q "code.claude.com/docs/en/setup"
+  line fail claude | grep -q "native installer"
 }
 
 @test "native install, logged in, tools present: all ok, exit 0" {

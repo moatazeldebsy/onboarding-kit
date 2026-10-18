@@ -2,7 +2,7 @@
 # Run shellcheck and the bats suite inside a clean Ubuntu container.
 set -euo pipefail
 cd "$(dirname "$0")/.."
-docker run --rm -v "$PWD":/src:ro -w /src ubuntu:24.04 bash -c '
+docker run --rm -v "$(pwd)":/src:ro -w /src ubuntu:24.04 bash -c '
   apt-get update -qq >/dev/null &&
   apt-get install -y -qq bats shellcheck >/dev/null &&
   shellcheck skills/machine-setup/scripts/doctor.sh &&
