@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.1.0 (unreleased)
+## 0.1.0 (2026-10-18)
 
 - Repo scaffold: plugin and marketplace manifests, README
 - Content: token playbook, role guide, role × level plugin matrix, settings and CLAUDE.md templates, docs fact-check
