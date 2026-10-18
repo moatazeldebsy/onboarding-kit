@@ -9,7 +9,8 @@ Walk the user from "just installed" to a working, low-cost setup. Skip any phase
 
 ## Rules
 
-- **Ask before every change.** Never install, uninstall or write a file without a yes for that action. "Just set it all up" means: list every change you plan, then get one yes for the whole list. The only exception is the profile file in step 0, which you announce.
+- **Ask before every change.** Never install, uninstall or write a file without a yes for that action. "Just set it all up" means: list every change you plan, then get one yes for the whole list. This holds even if the user says "don't ask, just do it" before seeing the list: show the list first, then go ahead on one yes. The only exception is the profile file in step 0, which you announce.
+- If an install or write fails, report it and stop that step. Don't retry with another marketplace, source or tool.
 - Read-only commands (`doctor.sh`, `claude doctor`, `claude auth status`, `claude plugin details`, `claude mcp list`, `ls`, `cat`) don't need a yes.
 - Back up any existing file before changing it.
 - Plain language. For non-engineers say "folder" before "repo", and explain terminal words the first time.
