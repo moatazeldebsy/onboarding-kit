@@ -60,7 +60,7 @@ report info shell "$(basename "${SHELL:-unknown}")"
 
 # --- Claude Code install ---
 if ! command -v claude >/dev/null 2>&1; then
-  report fail claude "claude not found on PATH" "curl -fsSL https://claude.ai/install.sh | bash"
+  report fail claude "claude not found on PATH" "Install it with the native installer: https://code.claude.com/docs/en/setup"
 else
   claude_path="$(command -v claude)"
   version="$(claude --version 2>/dev/null | head -1)"
@@ -69,7 +69,7 @@ else
   real="$(resolve "$claude_path")"
   case "$real" in
     *node_modules*) report warn install_method "npm install (no auto-update, needs Node 22+)" \
-                      "Switch to the native installer: curl -fsSL https://claude.ai/install.sh | bash, then npm uninstall -g @anthropic-ai/claude-code" ;;
+                      "Switch to the native installer (https://code.claude.com/docs/en/setup), then npm uninstall -g @anthropic-ai/claude-code" ;;
     *Caskroom*|*Cellar*|*homebrew*|*linuxbrew*) report info install_method "Homebrew (update with: brew upgrade claude-code)" ;;
     *.local/share/claude*|*.claude/local*) report ok install_method "native (auto-updates)" ;;
     *) report info install_method "unknown ($real)" ;;
@@ -85,18 +85,9 @@ else
   if printf '%s' "$auth" | grep -q '"loggedIn": *true'; then
     method="$(printf '%s' "$auth" | sed -n 's/.*"authMethod": *"\([^"]*\)".*/\1/p' | head -1)"
     report ok login "logged in${method:+ ($method)}"
-  elif [ -n "${CLAUDE_CODE_OAUTH_TOKEN:-}" ]; then
-    report ok login "using a token from CLAUDE_CODE_OAUTH_TOKEN"
-  elif [ -n "${ANTHROPIC_API_KEY:-}" ]; then
-    report ok login "using ANTHROPIC_API_KEY"
   else
     report fail login "not logged in (claude auth status)" "Run claude, then /login. Ignore this if you sign in with a token or API key from your environment"
   fi
-fi
-
-if [ -n "${ANTHROPIC_API_KEY:-}" ]; then
-  report info api_key "ANTHROPIC_API_KEY is set: usage is billed to the API key, not a subscription" \
-    "Unset it if you meant to use a Pro/Max/Team plan"
 fi
 
 if [ -d "$HOME/.claude" ]; then

@@ -1,16 +1,11 @@
 #!/usr/bin/env bash
 # Install Claude Code and this plugin on a clean Ubuntu container, the way a new user would.
-# Phase A (always): install, add the marketplace from this repo, install the plugin, run doctor.sh.
-# Phase B (only if CLAUDE_CODE_OAUTH_TOKEN is set): run the getting-started flow headless.
+# Installs, adds the marketplace from this repo, installs the plugin and runs doctor.sh.
+# For full conversations with a logged-in Claude, see clean-machine-flow.sh.
 set -euo pipefail
 cd "$(dirname "$0")/.."
 
-token_args=()
-if [ -n "${CLAUDE_CODE_OAUTH_TOKEN:-}" ]; then
-  token_args=(-e CLAUDE_CODE_OAUTH_TOKEN)
-fi
-
-docker run --rm ${token_args[@]+"${token_args[@]}"} -v "$PWD":/src:ro ubuntu:24.04 bash -c '
+docker run --rm -v "$PWD":/src:ro ubuntu:24.04 bash -c '
 set -euo pipefail
 apt-get update -qq >/dev/null
 apt-get install -y -qq curl ca-certificates git >/dev/null 2>&1

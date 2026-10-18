@@ -19,7 +19,7 @@ On native Windows without bash, run `claude --version`, `claude auth status` and
 
 ## 2. Report
 
-Show a short table: what's fine, what needs fixing. Explain each `fail` and `warn` in one plain sentence. Mention `info` lines only when they matter to this user (for example `api_key`: usage goes to an API bill, not their plan).
+Show a short table: what's fine, what needs fixing. Explain each `fail` and `warn` in one plain sentence. Mention `info` lines only when they matter to this user.
 
 ## 3. Fix, one at a time
 
@@ -29,13 +29,15 @@ Known fixes (from https://code.claude.com/docs/en/setup):
 
 | Check | Fix |
 |---|---|
-| `claude` missing | `curl -fsSL https://claude.ai/install.sh \| bash` (Homebrew alternative: `brew install --cask claude-code`, no auto-update) |
-| npm install | Install native (above), confirm `claude --version` works from the new path, then `npm uninstall -g @anthropic-ai/claude-code` |
+| `claude` missing | Native installer from https://code.claude.com/docs/en/setup (Homebrew alternative: `brew install --cask claude-code`, no auto-update) |
+| npm install | Native installer (above), then confirm `claude --version` works from the new path, then `npm uninstall -g @anthropic-ai/claude-code` |
 | Duplicate install | `type -a claude`; keep the native one, remove the others |
 | Not logged in | Start `claude` and run `/login` |
 | git missing | macOS `xcode-select --install`; Debian/Ubuntu `sudo apt install git` |
 | gh missing / logged out | `brew install gh` or https://cli.github.com; then `gh auth login` |
 | Search broken | Install ripgrep, set `"env": {"USE_BUILTIN_RIPGREP": "0"}` |
+
+Never pipe a downloaded script into a shell yourself. For the native installer, give the user the command from the setup page to run, e.g. with the `!` prefix.
 
 Only push git and gh on roles that need them (engineer, qa). For others, offer once with the reason and accept a no.
 

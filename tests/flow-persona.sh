@@ -1,14 +1,18 @@
 #!/usr/bin/env bash
 # Runs inside the clean container as a normal user. Called by clean-machine-flow.sh.
+# Usage: flow-persona.sh install   (Claude Code + plugin)
+#        flow-persona.sh run       (personas; needs a logged-in Claude)
 set -euo pipefail
-
-curl -fsSL https://claude.ai/install.sh | bash >/tmp/install.log 2>&1 || { tail -20 /tmp/install.log; exit 1; }
 export PATH="$HOME/.local/bin:$PATH"
+
+install() {
+curl -fsSL https://claude.ai/install.sh | bash >/tmp/install.log 2>&1 || { tail -20 /tmp/install.log; exit 1; }
 cp -r /src "$HOME/onboarding-kit"
 claude plugin marketplace add "$HOME/onboarding-kit" >/dev/null
 claude plugin install onboarding-kit@onboarding-kit >/dev/null
 # The official marketplace is what the kit recommends from.
 claude plugin marketplace add anthropics/claude-plugins-official >/dev/null 2>&1 || true
+}
 
 # say <session file> <message>: one user turn, prints Claude's reply.
 say() {
@@ -88,7 +92,11 @@ PY
   echo "--- CLAUDE.md"; cat CLAUDE.md 2>/dev/null || true
 }
 
-case "$WHO" in
+if [ "${1:-}" = install ]; then
+  install
+  exit 0
+fi
+case "${WHO:-both}" in
   pm) pm ;;
   engineer) engineer ;;
   *) pm; engineer ;;

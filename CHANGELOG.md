@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.1 (2026-10-18)
+
+- Directory review fixes: `doctor.sh` no longer checks API-key or login-token environment variables; the full-conversation test no longer reads or passes a token (you log in inside the container)
+- The machine-setup skill gives the user the native installer command instead of running a downloaded script itself
+- Plugin icon (`.claude-plugin/icon.png`)
+
 ## 0.1.0 (2026-10-18)
 
 - Repo scaffold: plugin and marketplace manifests, README

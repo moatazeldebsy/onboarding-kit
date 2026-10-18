@@ -100,7 +100,7 @@ npx bats tests/doctor.bats                     # machine-check tests
 tests/linux.sh                                 # same, in a clean Ubuntu container (Docker)
 claude plugin eval . --ablation none           # trigger, safety and persona evals
 tests/clean-machine.sh                         # install from the marketplace on clean Ubuntu
-tests/clean-machine-flow.sh both               # full conversations; needs a token, see the script
+tests/clean-machine-flow.sh both               # full conversations; interactive, you /login inside the container
 ```
 
 Every command and setting the kit mentions is checked against the docs in [docs/research](docs/research/2026-10-17-docs-factcheck.md). Re-check on new Claude Code releases.
