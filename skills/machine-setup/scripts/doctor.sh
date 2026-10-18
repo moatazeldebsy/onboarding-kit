@@ -85,8 +85,12 @@ else
   if printf '%s' "$auth" | grep -q '"loggedIn": *true'; then
     method="$(printf '%s' "$auth" | sed -n 's/.*"authMethod": *"\([^"]*\)".*/\1/p' | head -1)"
     report ok login "logged in${method:+ ($method)}"
+  elif [ -n "${CLAUDE_CODE_OAUTH_TOKEN:-}" ]; then
+    report ok login "using a token from CLAUDE_CODE_OAUTH_TOKEN"
+  elif [ -n "${ANTHROPIC_API_KEY:-}" ]; then
+    report ok login "using ANTHROPIC_API_KEY"
   else
-    report fail login "not logged in" "Run claude, then /login"
+    report fail login "not logged in (claude auth status)" "Run claude, then /login. Ignore this if you sign in with a token or API key from your environment"
   fi
 fi
 

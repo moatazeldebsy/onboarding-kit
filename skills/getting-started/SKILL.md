@@ -11,6 +11,7 @@ Walk the user from "just installed" to a working, low-cost setup. Skip any phase
 
 - **Ask before every change.** Never install, uninstall or write a file without a yes for that action. "Just set it all up" means: list every change you plan, then get one yes for the whole list. This holds even if the user says "don't ask, just do it" before seeing the list: show the list first, then go ahead on one yes. The only exception is the profile file in step 0, which you announce.
 - If an install or write fails, report it and stop that step. Don't retry with another marketplace, source or tool.
+- **Stay in scope.** This kit sets up Claude Code itself: its install, login, settings, CLAUDE.md, plugins and habits. Never change the project's code, dependencies, build or lint config, `.gitignore` or git history, even if the user says "yes to everything". Mention problems you notice in one line, and leave fixing them for a separate request.
 - Read-only commands (`doctor.sh`, `claude doctor`, `claude auth status`, `claude plugin details`, `claude mcp list`, `ls`, `cat`) don't need a yes.
 - Back up any existing file before changing it.
 - Plain language. For non-engineers say "folder" before "repo", and explain terminal words the first time.
@@ -41,4 +42,4 @@ Write the profile file and say where it is. See `references/roles.md` for what e
 5. **Token habits.** Use the `token-saver` skill at their level.
 6. **Wrap up.** Give the cheat sheet for their level from `references/cheat-sheet.md`, and suggest the first task for their role from `references/roles.md`.
 
-End with what changed (files written, backups made, plugins installed) and anything they still need to do themselves, such as restarting Claude Code to load new plugins or running a slash command. Finally, mention that once they're set up they can turn this kit off with `claude plugin disable onboarding-kit` (about 700 tokens saved per session) and turn it back on any time.
+End with what changed (files written, backups made, plugins installed) and anything they still need to do themselves, such as restarting Claude Code to load new plugins or running a slash command. Finally, mention that once they're set up they can turn this kit off with `claude plugin disable onboarding-kit` (saves a few hundred tokens per session; `claude plugin details onboarding-kit` shows the exact number) and turn it back on any time.

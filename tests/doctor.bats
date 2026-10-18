@@ -12,7 +12,7 @@ setup() {
     p="$(command -v "$tool" 2>/dev/null)" && ln -s "$p" "$BIN/$tool"
   done
   export HOME="$TMP/home"
-  unset ANTHROPIC_API_KEY
+  unset ANTHROPIC_API_KEY CLAUDE_CODE_OAUTH_TOKEN
   export LOGGED_IN=true
 }
 
@@ -91,6 +91,13 @@ line() {
   LOGGED_IN=false run_doctor
   [ "$status" -eq 1 ]
   line fail login | grep -q "/login"
+}
+
+@test "token login via CLAUDE_CODE_OAUTH_TOKEN counts as logged in" {
+  make_native_claude
+  LOGGED_IN=false CLAUDE_CODE_OAUTH_TOKEN=tok-secret run_doctor
+  line ok login | grep -q CLAUDE_CODE_OAUTH_TOKEN
+  [[ "$output" != *tok-secret* ]]
 }
 
 @test "missing git fails for an engineer" {
